@@ -1,0 +1,86 @@
+/* COLOR PALETTE:
+  #05668D
+  #028090
+  #00A896
+  #02C39A
+  #F0F3BD
+*/
+
+.App-header {
+  background-color: #05668D;
+  height: 55px;
+  color: white;
+  text-align: center;
+}
+
+.header-button{
+  background-color: #05668D;
+  color: white;
+  height: 55px;
+  width: 55px;
+  border: none;
+  float: right;
+}
+
+.header-button:hover{
+  background-color: #028090;
+}
+
+.board-button{
+  background-color: #05668D;
+  color: white;
+  height: 55px;
+  border: none;
+  float: left;
+  padding-bottom: 0px;
+  overflow: hidden;
+  font-family: 'Arsenal', sans-serif;
+}
+
+.board-button:hover{
+  background-color: #028090;
+}
+
+.board-button:hover .board-name-input{
+  background-color: #028090;
+}
+
+.board-name-input{
+  background-color: #05668D;
+  width: 65px;
+  border: none;
+  text-align: center;
+}
+
+.board-button-selected{
+  background-color: #00A896;
+}
+
+.left{
+  float: left;
+}
+
+.board-button-name{
+  overflow:hidden;
+}
+
+.new-note-button{
+  border-radius: 20px;
+  width: 40px;
+  height: 40px;
+  float: right;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+}
+
+.board{
+  width: 100%;
+  height: 95vh;
+}
+
+.note{
+  background-color: #F0F3BD;
+  width: 100px;
+  height: 100px;
+}
