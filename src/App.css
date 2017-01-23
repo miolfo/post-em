@@ -33,7 +33,6 @@
   border: none;
   float: left;
   padding-bottom: 0px;
-  overflow: hidden;
   font-family: 'Arsenal', sans-serif;
 }
 
@@ -43,6 +42,14 @@
 
 .board-button:hover .board-name-input{
   background-color: #028090;
+}
+
+.delete-board-button{
+  float: right;
+}
+
+.clipboard-image{
+  margin-left: 15px;
 }
 
 .board-name-input{
