@@ -30,7 +30,8 @@ class Board extends Component{
     }
     const notes = this.state.notes[this.props.selectedBoardIndex].map((obj, count) => {
       return(
-      <Note text={obj} key={count} index={count} noteChanged={this.noteChanged.bind(this)}/>)
+      <Note text={obj} key={count} index={count} noteChanged={this.noteChanged.bind(this)}
+      noteDeleted={this.noteDeleted.bind(this)}/>)
     });
     return notes;
   }
@@ -51,6 +52,14 @@ class Board extends Component{
     });
   }
 
+  noteDeleted(index){
+    const notes = this.state.notes.slice();
+    notes[this.props.selectedBoardIndex].splice(index, 1);
+    this.setState({
+      notes: notes
+    });
+  }
+
   boardDeleted(index){
     const notes = this.state.notes;
     notes.splice(index, 1);
@@ -62,7 +71,8 @@ class Board extends Component{
 
 function Note(props){
   return(<div className="note" key={props.index}>
-        <textarea className="note-textarea" defaultValue={props.text} 
+        <Delete className="right" onClick={props.noteDeleted.bind({}, props.index)}/>
+        <textarea className="note-textarea" value={props.text} 
           onChange={props.noteChanged.bind({}, props.index)}>
         </textarea>
         </div>);
@@ -90,7 +100,7 @@ class App extends Component {
         }
         return(
           <button className={classNames1} key={count} onClick={() => this.boardButtonClicked(count)}>
-            <Delete className="delete-board-button" onClick={() => this.deleteBoard(count)}/>
+            <Delete className="right" onClick={() => this.deleteBoard(count)}/>
             <Clipboard className="clipboard-image" size="25"/>
             <div className="board-button-name">
               <form className="left">

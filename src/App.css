@@ -44,9 +44,7 @@
   background-color: #028090;
 }
 
-.delete-board-button{
-  float: right;
-}
+
 
 .clipboard-image{
   margin-left: 15px;
@@ -65,6 +63,10 @@
 
 .left{
   float: left;
+}
+
+.right{
+  float: right;
 }
 
 .board-button-name{
@@ -87,7 +89,7 @@
 }
 
 .note{
-  width: 100px;
+  width: 115px;
   height: 100px;
   display: inline-block;
   margin: 10px;
