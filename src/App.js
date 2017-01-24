@@ -28,12 +28,9 @@ class Board extends Component{
     if(this.state.notes.length <= this.props.selectedBoardIndex){
       this.state.notes.push([]);
     }
-    if(this.props.selectedBoardIndex === -1) return;
     const notes = this.state.notes[this.props.selectedBoardIndex].map((obj, count) => {
       return(
-      <div className="note" key={count}>
-        {obj}
-      </div>)
+      <Note text={obj} key={count} index={count}/>)
     });
     return notes;
   }
@@ -53,7 +50,13 @@ class Board extends Component{
       notes: notes
     });
   }
+}
 
+function Note(props){
+  return(<div className="note" key={props.index}>
+        <textarea className="note-textarea" defaultValue={props.text}>
+        </textarea>
+        </div>);
 }
 
 

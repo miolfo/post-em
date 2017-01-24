@@ -87,7 +87,14 @@
 }
 
 .note{
-  background-color: #F0F3BD;
   width: 100px;
   height: 100px;
+  display: inline-block;
+  margin: 10px;
+}
+
+.note-textarea{
+  width: 100px;
+  height: 100px;
+  background-color: #F0F3BD;
 }
