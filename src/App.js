@@ -30,7 +30,7 @@ class Board extends Component{
     }
     const notes = this.state.notes[this.props.selectedBoardIndex].map((obj, count) => {
       return(
-      <Note text={obj} key={count} index={count}/>)
+      <Note text={obj} key={count} index={count} noteChanged={this.noteChanged.bind(this)}/>)
     });
     return notes;
   }
@@ -41,6 +41,14 @@ class Board extends Component{
     this.setState({
        notes: notes
     });    
+  }
+
+  noteChanged(index, event){
+    const notes = this.state.notes.slice();
+    notes[this.props.selectedBoardIndex][index] = event.target.value;
+    this.setState({
+      notes: notes
+    });
   }
 
   boardDeleted(index){
@@ -54,7 +62,8 @@ class Board extends Component{
 
 function Note(props){
   return(<div className="note" key={props.index}>
-        <textarea className="note-textarea" defaultValue={props.text}>
+        <textarea className="note-textarea" defaultValue={props.text} 
+          onChange={props.noteChanged.bind({}, props.index)}>
         </textarea>
         </div>);
 }
