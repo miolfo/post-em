@@ -7,9 +7,14 @@ import Delete from 'react-icons/lib/ti/delete';
 class Board extends Component{
   constructor(name){
     super();
-    this.state = {
-      name: name,
-      notes: [[]]
+    const thisBoard = JSON.parse(localStorage.getItem("postemboard"));
+    if(thisBoard === null){
+      this.state = {
+        notes: [[]]
+      }
+    }
+    else{
+      this.state = thisBoard;
     }
   }
 
@@ -25,7 +30,7 @@ class Board extends Component{
   }
 
   renderNotes(){
-    if(this.state.notes.length <= this.props.selectedBoardIndex){
+    while(this.state.notes.length <= this.props.selectedBoardIndex){
       this.state.notes.push([]);
     }
     const notes = this.state.notes[this.props.selectedBoardIndex].map((obj, count) => {
@@ -34,6 +39,10 @@ class Board extends Component{
       noteDeleted={this.noteDeleted.bind(this)}/>)
     });
     return notes;
+  }
+
+  componentDidUpdate(){
+    this.saveState();
   }
 
   addNote(){
@@ -67,6 +76,10 @@ class Board extends Component{
       notes: notes
     });
   }
+
+  saveState(){
+    localStorage.setItem("postemboard", JSON.stringify(this.state));
+  }
 }
 
 function Note(props){
@@ -82,10 +95,20 @@ function Note(props){
 class App extends Component {
   constructor(){
     super();
-    this.state = {
-      boards: [],
-      selectedBoardIndex: 0
-    };
+    const savedBoards = JSON.parse(localStorage.getItem("postemapp"));
+    if(savedBoards === null){
+      this.state = {
+        boards: [],
+        selectedBoardIndex: 0
+      };
+    }
+    else{
+      const boards = savedBoards.boards === null ? [] : savedBoards.boards;
+      this.state = {
+        boards: boards,
+        selectedBoardIndex: 0
+      };
+    }
   }
   
   render() {
@@ -104,7 +127,7 @@ class App extends Component {
             <Clipboard className="clipboard-image" size="25"/>
             <div className="board-button-name">
               <form className="left">
-                <input className={classNames2} value={obj.state.name}
+                <input className={classNames2} value={obj}
                 onChange={this.editBoardName.bind(this, count)}/>
               </form>
             </div>
@@ -130,6 +153,10 @@ class App extends Component {
     );
   }
 
+  componentDidUpdate(){
+    this.saveState();
+  }
+
   boardButtonClicked(index){
     this.setState({
       selectedBoardIndex: index
@@ -138,7 +165,7 @@ class App extends Component {
 
   editBoardName(count, event){
     const boards = this.state.boards.slice();
-    const board = new Board(event.target.value);
+    const board = event.target.value;
     boards[count] = board;
     this.setState({
       boards: boards
@@ -151,7 +178,8 @@ class App extends Component {
       return;
     }
     const boards = this.state.boards.slice();
-    const newBoard = new Board("Board");
+    //const newBoard = new Board("Board");
+    const newBoard = "Board";
     this.setState({
       boards: boards.concat(newBoard),
     });
@@ -167,6 +195,10 @@ class App extends Component {
       });
     }
     else return;
+  }
+
+  saveState(){
+    localStorage.setItem("postemapp", JSON.stringify(this.state));
   }
 }
 
