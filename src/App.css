@@ -99,4 +99,5 @@
   width: 100px;
   height: 100px;
   background-color: #F0F3BD;
+  resize: none;
 }
